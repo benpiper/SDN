@@ -264,8 +264,8 @@
                         PortProfileData=2
                     }
                 )
-              },
-              @{ 
+              }
+              <#@{ 
                 VMName="MTGW-01"                                        
 				VMMemory=4GB                                            
                 VMRole = "Gateway"
@@ -290,7 +290,7 @@
 
                 #This must match the VLAN ID for the transit network as defined in the logical networks section
                 ExternalVlanId = "0"                         
-              }
+              }#>
             )
          },
          <#@{ 
