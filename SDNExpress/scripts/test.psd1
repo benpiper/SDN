@@ -9,7 +9,8 @@
 
             #VM Creation variables
                         
-            VHDName="2016_x64_Datacenter_EN_Eval.vhdx"
+            #VHDName="2016_x64_Datacenter_EN_Eval.vhdx"
+            VHDName="2016TP5_x64_Datacenter_EN.vhdx"
             ProductKey=""                                                                               
 
             #Update to a local path on the hyper-v hosts if local storage, or a UNC path for shared storage  
