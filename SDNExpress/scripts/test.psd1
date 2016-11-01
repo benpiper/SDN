@@ -457,7 +457,7 @@
             MuxVirtualServerResourceId="MUX-01"                        
             MuxResourceId="MUX-01"                                     
             HnvPaMac="00-1D-C8-00-00-02"
-         },
+         }#,
          <#@{ 
             NodeName="MUX-02"                                          
             Role="SLBMUX"
@@ -465,7 +465,7 @@
             MuxResourceId="MUX-02"                                     
             HnvPaMac="00-1D-C8-00-00-04"            
          },   #>      
-         @{ 
+         <#@{ 
             NodeName="MTGW-01"                                         
             Role     = "Gateway"
             GatewayPoolResourceId = "default"
@@ -475,7 +475,7 @@
             InternalNicMac = "00-20-11-11-11-01"
             ExternalNicMac = "00-20-11-11-11-02"
             ExternalIPAddress = "10.10.10.111"                            
-         }
+         }#>
        <#  @{ 
             NodeName="MTGW-02"                                            
             Role     = "Gateway"
