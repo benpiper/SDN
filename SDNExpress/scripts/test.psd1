@@ -249,7 +249,7 @@
                     }
                 )
               },
-              @{    
+              <#@{    
                 VMName="MUX-01"                                         
 				VMMemory=4GB                                            
                 NICs=@(
@@ -450,7 +450,7 @@
          @{ 
             NodeName="NC-03"                                           
             Role="NetworkController"
-         },#>
+         },
          @{ 
             NodeName="MUX-01"                                          
             Role="SLBMUX"
@@ -464,7 +464,7 @@
             MuxVirtualServerResourceId="MUX-02"                        
             MuxResourceId="MUX-02"                                     
             HnvPaMac="00-1D-C8-00-00-04"            
-         },   #>      
+         },         
          @{ 
             NodeName="MTGW-01"                                         
             Role     = "Gateway"
