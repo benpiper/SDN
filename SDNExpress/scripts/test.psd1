@@ -6,6 +6,7 @@
             NodeName="*"              # * indicates this section applies to all nodes.  Don't change it.
             
             InstallSrcDir="\\$env:Computername\SDNExpress"
+            HostInstallSrcDir="\\$env:Computername\SDNExpress"
 
             #VM Creation variables
                         
