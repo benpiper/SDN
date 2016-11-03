@@ -33,6 +33,7 @@
     VLANs as defined in the configuration data.
     * The deployment computer must have the deployment directory shared with 
     Read/Write permissions for Everyone.
+    * You must run the script as a domain administrator.
 #>
 
 [CmdletBinding(DefaultParameterSetName="NoParameters")]
@@ -45,6 +46,16 @@ param(
 
 # Script version, should be matched with the config files
 $ScriptVersion = "1.1"
+
+# Verify that the running user is a member of Domain Admins
+$CurrentUser = [System.Security.Principal.WindowsIdentity]::GetCurrent()
+$WindowsPrincipal = New-Object System.Security.Principal.WindowsPrincipal($CurrentUser)
+
+if(!$WindowsPrincipal.IsInRole("Domain Admins"))
+{
+    Write-Warning "You are not a Domain Admin. Please rerun the script as a Domain Admin."
+    break;
+}
 
 Configuration SetHyperVWinRMEnvelope
 {
