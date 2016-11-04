@@ -1257,7 +1257,7 @@ Configuration ConfigureNetworkControllerCluster
                 ipconfig /flushdns
 
                 #ensure we have DNS connectivity via the VIP
-                [String[]]$dnsServers = (Get-DnsClientServerAddress -AddressFamily ipv4 -InterfaceAlias $using:node.MgmtNICAlias).ServerAddresses
+                [String[]]$dnsServers = (Get-DnsClientServerAddress -AddressFamily ipv4 -InterfaceAlias Ethernet).ServerAddresses
                 $dnsWorking = $false
                 $dnsClientTracing = $false
                 $dnsServerTracing = $false

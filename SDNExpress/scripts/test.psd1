@@ -7,7 +7,6 @@
             
             InstallSrcDir="\\$env:Computername\SDNExpress"
             HostInstallSrcDir="\\$env:Computername\SDNExpress"
-            MgmtNICAlias = "vEthernet (Management)" # Used for DNS tracing
 
             #VM Creation variables
                         
