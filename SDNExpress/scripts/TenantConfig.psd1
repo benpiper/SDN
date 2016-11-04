@@ -8,27 +8,27 @@
 
             #VM Creation variables
                         
-            VHDName="<< Replace >>"    # Name of the VHDX to use for VM creation. must exist in the images path under InstallSrcDir
+            VHDName="2016_x64_Datacenter_EN_Eval.vhdx"    # Name of the VHDX to use for VM creation. must exist in the images path under InstallSrcDir
             ProductKey=""                                                                               # Can be blank if using a volume license, or you are deploying in eval mode.  (Don't forget to press "skip").
 
             #Update to a local path on the hyper-v hosts if local storage, or a UNC path for shared storage  
-            VMLocation="<< Replace >>"                                          #Example: "C:\ClusterStorage\Volume1\VMs"
+            VMLocation="e:\sdnvm"                                          #Example: "C:\ClusterStorage\Volume1\VMs"
             
             # Network controller computer name with FQDN
-            NetworkControllerRestName = "<< Replace >>.$env:USERDNSDOMAIN"        #Example (after evaluation of $env:USERDNSDOMAIN): myname.contoso.com
+            NetworkControllerRestName = "nc-01.$env:USERDNSDOMAIN"        #Example (after evaluation of $env:USERDNSDOMAIN): myname.contoso.com
             
             #This is the name of the virtual switch that must exist on each host.  Note: if you have any 
             #Hyper-V hosts which virtual switches that are named differently, you can override this variable
             #by adding it to the "HyperVHost" role nodes as needed.
-            vSwitchName = "<< Replace >>"                                       #Example: SDNSwitch
+            vSwitchName = "sdnSwitch"                                       #Example: SDNSwitch
 
             #This is the user account and password that the Service Fabric cluster nodes will use for communicating with each other
             #The NCClusterUsername must contain the Domain name in the format DOMAIN\User
-            NCClusterUsername = '<< Replace >>'                               #Example: CONTOSO\AlYoung
-            NCClusterPassword = '<< Replace >>'                               #Example: MySuperS3cretP4ssword
+            NCClusterUsername = 'company\administrator'                               #Example: CONTOSO\AlYoung
+            NCClusterPassword = 'Tr@ining123'                               #Example: MySuperS3cretP4ssword
 
             #Password to assign to the local administrator of created VMs
-            VMLocalAdminPassword = '<< Replace >>'                              #Example: "V3ryC0mplexP4ssword"
+            VMLocalAdminPassword = 'Tr@ining123'                              #Example: "V3ryC0mplexP4ssword"
             
             #iDNS is a shared name resolution service. Change this to $false if you you want to use your own DNS server.
             UseIDns = $true                                                   
@@ -59,14 +59,14 @@
              VIPLN_GUID = "f8f67956-3906-4303-94c5-09cf91e7e311"
 
              #VIP for web tier.  Must come from VIP subnet passed into SDNExpress.
-             VIPIP = "<< Replace >>"                                            #Example: "10.127.134.133"
+             VIPIP = "10.0.50.5"                                            #Example: "10.127.134.133"
 
              NetworkInterfaces = @{
                 WebTier = @("6daca142-7d94-0000-1111-c38c0141be06", "e8425781-5f40-0000-1111-88b7bc7620ca")
                 DbTier = @("334b8585-e6c7-0000-1111-ccb84a842922")
              }
 
-             TenantName = "<< Replace >>"                                       #Example: "Contoso"
+             TenantName = "company"                                       #Example: "Contoso"
 
              #
              #You generally don't need to change the rest of the values in this section
@@ -84,7 +84,7 @@
         
         @{ 
             # Host to create a web tier VM on.
-            NodeName="<< Replace >>"                                            #Example: "Host-02"
+            NodeName="HYPERV1"                                            #Example: "Host-02"
             Role="HyperVHost"
             VMs=@(
                 # Customization information for WebTier VM.  You don't need to change this  unless you changed the virtual network information above.
@@ -97,12 +97,32 @@
                     MacAddress="001DC8B70100"
                     PageColor="green"
                     Role="WebTier"
+                },
+                @{ 
+                    VMName="T1WebTier-VM2"
+                    VMMemory=2GB
+                    ResourceId="e8425781-5f40-0000-1111-88b7bc7620ca" 
+                    Subnet=0
+                    IPAddress="192.168.0.11"
+                    MacAddress="001DC8B70101"
+                    PageColor="blue"
+                    Role="WebTier"
+                },
+                @{ 
+                    VMName="T1DBTier-VM1"
+                    VMMemory=2GB
+                    ResourceId="334b8585-e6c7-0000-1111-ccb84a842922" 
+                    Subnet=1
+                    IPAddress="192.168.1.10"
+                    MacAddress="001DC8B70102"
+                    PageColor="white"
+                    Role="DBTier"
                 }
             )
-         },
-        @{ 
+         }
+        <#@{ 
             # Host to create additoinal VMs on.
-            NodeName="<< Replace >>"                                            #Example: "Host-03"
+            NodeName="HYPERV1"                                            #Example: "Host-03"
             Role="HyperVHost"
             VMs=@(
                 # Customization information for WebTier and DB Tier VMs.  You don't need to change this  unless you changed the virtual network information above.
@@ -127,7 +147,7 @@
                     Role="DBTier"
                 }
             )
-         },
+         },#>
 
         @{
             NodeName="localhost"
@@ -156,7 +176,7 @@
                     PeerIPAddresses = @()
 
                     # Tunnel Destination (Enterprise Gateway) IP Address
-                    DestinationIPAddress = "<<Replace>>"                                      #Example: "10.127.134.121"
+                    DestinationIPAddress = "192.168.88.1"                                      #Example: "10.127.134.121"
                     # Pre Shared Key (Only PSK is enabled via this script for IPSec VPN)
                     SharedSecret = "111_aaa"                      
                 },
@@ -180,7 +200,7 @@
                     PeerIPAddresses = @()
                     
                     # Tunnel Destination (Enterprise Gateway) IP Address
-                    DestinationIPAddress = "<<Replace>>"                                      #Example: "10.127.134.122"
+                    DestinationIPAddress = "192.168.88.1"                                      #Example: "10.127.134.122"
                     # GRE Key for Tunnel Isolation 
                     GreKey = "1234"                      
                 },
@@ -197,10 +217,10 @@
                         Subnets = @(
                             @{
                                 Guid = "L3_Subnet1"
-                                AddressSpace = "<<Replace>>"                                  #Example: "10.127.134.0"
-                                Mask = "<<Replace>>"                                          #Example: 25
-                                DefaultGateway = "<<Replace>>"                                #Example: "10.127.134.1"
-                                VlanId = "<<Replace>>"                                        #Example: 1001
+                                AddressSpace = "192.168.88.0"                                  #Example: "10.127.134.0"
+                                Mask = "24"                                          #Example: 25
+                                DefaultGateway = "192.168.88.1"                                #Example: "10.127.134.1"
+                                VlanId = "0"                                        #Example: 1001
                             }
                         )
                     }
@@ -216,12 +236,12 @@
                     # Local HNV Gateway's L3 Forwarding IP Address
                     IPAddresses = @(
                         @{
-                            IPAddress = "<<Replace>>"                                        #Example: "10.127.134.55"
-                            Mask = "<<Replace>>"                                             #Example: 25
+                            IPAddress = "192.168.88.1"                                        #Example: "10.127.134.55"
+                            Mask = "24"                                             #Example: 25
                         }
                     )
                     # Remote Gateway's L3 Forwarding IP Address
-                    PeerIPAddresses = @("<<Replace>>")                                       #Example: @("10.127.134.65")
+                    PeerIPAddresses = @("192.168.88.1")                                       #Example: @("10.127.134.65")
                 }
             )
 
