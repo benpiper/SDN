@@ -1258,7 +1258,7 @@ Configuration ConfigureNetworkControllerCluster
 
                 #ensure we have DNS connectivity via the VIP
                 [String[]]$dnsServers = (Get-DnsClientServerAddress -AddressFamily ipv4 -InterfaceAlias Ethernet).ServerAddresses
-                $dnsWorking = $false
+                $dnsWorking = $true #set to true to bypass DNS tracing which doesn't work
                 $dnsClientTracing = $false
                 $dnsServerTracing = $false
 
