@@ -93,7 +93,7 @@
                     VMMemory=2GB
                     ResourceId="6daca142-7d94-0000-1111-c38c0141be06"
                     Subnet=0
-                    IPAddress="192.168.0.10"
+                    IPAddress="192.168.3.10"
                     MacAddress="001DC8B70100"
                     PageColor="green"
                     Role="WebTier"
@@ -103,7 +103,7 @@
                     VMMemory=2GB
                     ResourceId="e8425781-5f40-0000-1111-88b7bc7620ca" 
                     Subnet=0
-                    IPAddress="192.168.0.11"
+                    IPAddress="192.168.3.11"
                     MacAddress="001DC8B70101"
                     PageColor="blue"
                     Role="WebTier"
@@ -113,7 +113,7 @@
                     VMMemory=2GB
                     ResourceId="334b8585-e6c7-0000-1111-ccb84a842922" 
                     Subnet=1
-                    IPAddress="192.168.1.10"
+                    IPAddress="192.168.4.10"
                     MacAddress="001DC8B70102"
                     PageColor="white"
                     Role="DBTier"
