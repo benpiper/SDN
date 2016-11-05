@@ -31,7 +31,7 @@
             VMLocalAdminPassword = 'Tr@ining123'                              #Example: "V3ryC0mplexP4ssword"
             
             #iDNS is a shared name resolution service. Change this to $false if you you want to use your own DNS server.
-            UseIDns = $true                                                   
+            UseIDns = $false                                                   
 
             #Virtual network information.  You don't need to change this, unless you want to.
             Network = @{
@@ -40,15 +40,15 @@
                     Subnets = @(
                         @{
                            ID = "WebTier_Subnet"
-                           AddressSpace = "192.168.0.0"
-                           Gateway = "192.168.0.1"
+                           AddressSpace = "192.168.3.0"
+                           Gateway = "192.168.3.1"
                            Mask = "24"
                            ACLGuid = "d7ae4460-694d-0000-1111-4943211728a9"
                          },
                         @{
                            ID = "DBTier_Subnet"
-                           AddressSpace = "192.168.1.0"
-                           Gateway = "192.168.1.1"
+                           AddressSpace = "192.168.4.0"
+                           Gateway = "192.168.4.1"
                            Mask = "24"
                            AclGuid = "e32a6d3c-7082-0000-1111-9bd5fa05bbc9"
                          }
@@ -168,7 +168,7 @@
                     # You can also add multiple subnets here
                     Routes = @(
                         @{
-                            Prefix = "14.1.10.1/32"
+                            Prefix = "192.168.88.1/32"
                             Metric = 10
                         }
                     )
@@ -192,7 +192,7 @@
                     # You can also add multiple subnets here
                     Routes = @(
                         @{
-                            Prefix = "14.1.20.1/32"
+                            Prefix = "192.168.88.1/32"
                             Metric = 10
                         }
                     )
@@ -229,7 +229,7 @@
                     # You can also add multiple subnets here
                     Routes = @(
                         @{
-                            Prefix = "14.1.30.1/32"
+                            Prefix = "192.168.88.1/32"
                             Metric = 10
                         }
                     )
@@ -252,24 +252,24 @@
             BgpRouter = @{
                 RouterId = "Vnet_Router1"
                 LocalASN = 64510
-                RouterIP = "192.168.0.2"
+                RouterIP = "192.168.88.9"
             }
 
             BgpPeers = 
             @(
                 @{
                     PeerName = "SiteA_IPSec"
-                    PeerIP   = "14.1.10.1"
+                    PeerIP   = "192.168.88.1"
                     PeerASN  = 64521
                 },
                 @{
                     PeerName = "SiteB_Gre"
-                    PeerIP   = "14.1.20.1"
+                    PeerIP   = "192.168.88.1"
                     PeerASN  = 64522
                 },
                 @{
                     PeerName = "SiteC_L3"
-                    PeerIP   = "14.1.30.1"
+                    PeerIP   = "192.168.88.1"
                     PeerASN  = 64523
                 }
             )
