@@ -25,7 +25,7 @@
             #This is the FQDN that the Network Controller's REST IP is assigned to.
             #IMPORTANT: This name must be manually added to your DNS server and map to the NetworkControllerRestIP
             NetworkControllerRestName = "nc-01.$env:USERDNSDOMAIN"    #Example (after evaluation of $env:USERDNSDOMAIN): myname.COMPANY.com
-            NetworkControllerRestIP = "192.168.88.12"                         #Example: 10.20.30.40
+            NetworkControllerRestIP = "192.168.3.12"                         #Example: 10.20.30.40
             NetworkControllerRestIPMask = "24"                     #Example: 24
            
             #This is the name of the virtual switch that must exist on each host.  Note: if you have any 
@@ -48,7 +48,7 @@
             #on the Management network and it must be an address which is reachable from the Network Controller nodes.
             iDNSAdminUsername = 'administrator'                                 #Example: "administrator"
             iDNSAdminPassword = 'Tr@ining123'                #Example: "Tr@ining123"
-            iDNSAddress= '192.168.88.10'                                     #Example: "10.0.0.7"
+            iDNSAddress= '192.168.3.10'                                     #Example: "10.0.0.7"
             iDNSZoneName = 'COMPANY.pri'                                #Example: "COMPANY.local"
             iDNSMacAddress = 'AA-BB-CC-AA-BB-CC'
             iDNSCredentialResourceId = 'c6abefg6-44fb-45f6-89ec-5ebd890a144f' 
@@ -68,11 +68,11 @@
                     Subnets = @(
                         @{
                             VLANID = "0" 
-                            AddressPrefix = "192.168.88.0/24"        
-                            DNS = @("192.168.88.10")             
-                            Gateways = @("192.168.88.1")          
-                            PoolStart = "192.168.88.20"          
-                            PoolEnd = "192.168.88.39"            
+                            AddressPrefix = "192.168.3.0/24"        
+                            DNS = @("192.168.3.10")             
+                            Gateways = @("192.168.3.1")          
+                            PoolStart = "192.168.3.40"          
+                            PoolEnd = "192.168.3.79"            
                        }
                     )
                 },    
@@ -81,11 +81,11 @@
                     ResourceId = 'f8f67956-3906-4303-94c5-09cf91e7e311'
                     Subnets = @(
                         @{
-                            AddressPrefix = "41.40.40.0/27"         
-                            DNS = @("10.184.108.9")                 
-                            Gateways = @("41.40.40.1")              
-                            PoolStart = "41.40.40.2"                
-                            PoolEnd = "41.40.40.8"                  
+                            AddressPrefix = "192.168.3.0/24"         
+                            DNS = @("192.168.3.10")                 
+                            Gateways = @("192.168.3.1")              
+                            PoolStart = "192.168.3.120"                
+                            PoolEnd = "192.168.3.159"                  
                             IsPublic = $true
                             IsVipPool = $true
                         }  
@@ -97,11 +97,11 @@
                     ResourceId = '0a386df6-5c5e-48bb-ab4b-709659aaa85a'
                     Subnets = @(
                         @{
-                            AddressPrefix = "10.0.50.0/24"
-                            DNS = @("10.184.108.9")
-                            Gateways = @("10.0.50.1")
-                            PoolStart = "10.0.50.5"
-                            PoolEnd = "10.0.50.100"
+                            AddressPrefix = "192.168.3.0/24"
+                            DNS = @("192.168.3.10")
+                            Gateways = @("192.168.3.1")
+                            PoolStart = "192.168.3.160"
+                            PoolEnd = "192.168.3.199"
                             IsVipPool = $true
                         }
                     )
@@ -111,11 +111,11 @@
                     ResourceId = 'f8f67956-3906-4303-94c5-09cf91e7e33'
                     Subnets = @(
                         @{  ## Gre GW's VIP Subnet
-                            AddressPrefix = "10.90.0.0/24"                  
-                            DNS = @("10.50.34.10")                          
-                            Gateways = @("10.90.0.1")                     
-                            PoolStart = "10.90.0.100"                     
-                            PoolEnd = "10.90.0.150"                       
+                            AddressPrefix = "192.168.3.0/24"                  
+                            DNS = @("192.168.3.10")                          
+                            Gateways = @("192.168.3.1")                     
+                            PoolStart = "192.168.3.200"                     
+                            PoolEnd = "192.168.3.239"                       
                         }
                     )
                 },
@@ -125,11 +125,11 @@
                     Subnets = @(
                         @{
                             VLANID = "0"                         
-                            AddressPrefix = "10.10.10.0/24"       
-                            DNS = @("10.184.108.9")               
-                            Gateways = @("10.10.10.1")            
-                            PoolStart = "10.10.10.100"            
-                            PoolEnd = "10.10.10.150"              
+                            AddressPrefix = "192.168.3.0/24"       
+                            DNS = @("192.168.3.10")               
+                            Gateways = @("192.168.3.1")            
+                            PoolStart = "192.168.3.80"            
+                            PoolEnd = "192.168.3.119"              
                         }  
                     )
                 },    
@@ -139,11 +139,11 @@
                     Subnets = @(
                         @{
                             VLANID = "0"                        
-                            AddressPrefix = "192.168.88.0/24"   
-                            DNS = @("192.168.88.10")             
-                            Gateways = @("192.168.88.1")        
-                            PoolStart = "192.168.88.40"        
-                            PoolEnd = "192.168.88.49"          
+                            AddressPrefix = "192.168.3.0/24"   
+                            DNS = @("192.168.3.10")             
+                            Gateways = @("192.168.3.1")        
+                            PoolStart = "192.168.3.4"        
+                            PoolEnd = "192.168.3.39"          
                         }  
                     )
                 }
@@ -173,7 +173,7 @@
             MuxPeerRouterName = 'BGPGateway-0'
             
             #MuxPeerRouterIP is typically the default gateway IP for the HNV PA network. 
-            MuxPeerRouterIP = '10.10.56.1'                              
+            MuxPeerRouterIP = '192.168.3.1'                              
             
             #This is the ASN that is assigned to the physical router.  If BGP is used throughout your core network you must
             #coordinate with your network administrators to use an appropriate value.  If this is an island then you choose your
@@ -188,13 +188,13 @@
             #This section defines the BGP peerinf information for the GRE gateway.  If your BGP gateways use the same physical routers
             #as the muxes then you can use the same values, otherwise you will need to specify the values that are defined for the routers
             #that are serving the GRE gateways.
-            GreBgpPeerRouterIP = '10.10.56.1'                  
+            GreBgpPeerRouterIP = '192.168.3.1'                  
             GreBgpPeerRouterASN = '1'                          
             GreBgpRouterASN = '3'                              
             
             #This is the public IP address that is assigned to the Site-to-site gateway pool.  It must come from the public VIP logical
             #network pool defined above.
-            GatewayPublicIPAddress = "41.40.40.3"              
+            GatewayPublicIPAddress = "192.168.3.120"              
 
             #You generally don't need to change the rest of the values in this section
 
@@ -232,12 +232,12 @@
             Role="HyperVHost"
             VMs=@(
               @{ 
-                VMName="NC-01"                                     
+                VMName="NC1"                                     
 				VMMemory=4GB                                       
                 NICs=@(
                     @{
                         Name="Management"
-                        IPAddress="192.168.88.11"                   
+                        IPAddress="192.168.3.11"                   
                         LogicalNetwork = "Management"
 
                         #Static MAC address to use for the VM. 
@@ -251,12 +251,12 @@
                 )
               },
               @{    
-                VMName="MUX-01"                                         
+                VMName="MUX1"                                         
 				VMMemory=4GB                                            
                 NICs=@(
                     @{
                         Name="HNVPA"
-                        IPAddress="192.168.88.20"                           
+                        IPAddress="192.168.3.40"                           
                         LogicalNetwork = "HNVPA"
                         MacAddress="00-1D-C8-00-00-02"
 
@@ -274,7 +274,7 @@
                 NICs=@(
                     @{
                         Name="Management"
-                        IPAddress="192.168.88.30"                      
+                        IPAddress="192.168.3.13"                      
                         LogicalNetwork = "Management"
                         MacAddress="00-1D-C8-00-01-01"
 
@@ -440,9 +440,9 @@
             Role="HyperVHost"
          },#>
          @{ 
-            NodeName="NC-01"                                             
+            NodeName="NC1"                                             
             Role="NetworkController"
-            ServiceFabricRingMembers=@("NC-01")      
+            ServiceFabricRingMembers=@("NC1")      
          },
          <#@{ 
             NodeName="NC-02"                                           
@@ -453,9 +453,9 @@
             Role="NetworkController"
          },#>
          @{ 
-            NodeName="MUX-01"                                          
+            NodeName="MUX1"                                          
             Role="SLBMUX"
-            MuxVirtualServerResourceId="MUX-01"                        
+            MuxVirtualServerResourceId="MUX1"                        
             MuxResourceId="MUX-01"                                     
             HnvPaMac="00-1D-C8-00-00-02"
          }#,
