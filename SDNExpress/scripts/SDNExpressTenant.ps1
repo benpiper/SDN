@@ -491,8 +491,8 @@ Configuration CreateNetwork
                     . "$($node.InstallSrcDir)\scripts\NetworkControllerRESTWrappers.ps1" -ComputerName $using:node.NetworkControllerRestName -UserName $using:node.NCClusterUserName -Password $using:node.NCClusterPassword
 
                     $aclRules = @()
-                    $aclRules += New-NCAccessControlListRule -Protocol "ALL" -SourcePortRange "0-65535" -DestinationPortRange "0-65535" -sourceAddressPrefix "192.168.0.0/24" -destinationAddressPrefix "*" -Action "Deny" -ACLType "Inbound" -Logging $true -Priority 100
-                    $aclRules += New-NCAccessControlListRule -Protocol "ALL" -SourcePortRange "0-65535" -DestinationPortRange "0-65535" -sourceAddressPrefix "*" -destinationAddressPrefix "192.168.0.0/24" -Action "Deny" -ACLType "Outbound" -Logging $true -Priority 101
+                    #$aclRules += New-NCAccessControlListRule -Protocol "ALL" -SourcePortRange "0-65535" -DestinationPortRange "0-65535" -sourceAddressPrefix "192.168.0.0/24" -destinationAddressPrefix "*" -Action "Deny" -ACLType "Inbound" -Logging $true -Priority 100
+                    #$aclRules += New-NCAccessControlListRule -Protocol "ALL" -SourcePortRange "0-65535" -DestinationPortRange "0-65535" -sourceAddressPrefix "*" -destinationAddressPrefix "192.168.0.0/24" -Action "Deny" -ACLType "Outbound" -Logging $true -Priority 101
                     $aclRules += New-NCAccessControlListRule -Protocol "ALL" -SourcePortRange "0-65535" -DestinationPortRange "0-65535" -sourceAddressPrefix "*" -destinationAddressPrefix "*" -Action "Allow" -ACLType "Inbound" -Logging $true -Priority 102
                     $aclRules += New-NCAccessControlListRule -Protocol "ALL" -SourcePortRange "0-65535" -DestinationPortRange "0-65535" -sourceAddressPrefix "*" -destinationAddressPrefix "*" -Action "Allow" -ACLType "Outbound" -Logging $true -Priority 103
                     $acl = New-NCAccessControlList -resourceId $using:node.network.subnets[0].ACLGUID -AccessControlListRules $aclRules
