@@ -71,7 +71,7 @@
                             AddressPrefix = "192.168.3.0/24"        
                             DNS = @("192.168.3.10")             
                             Gateways = @("192.168.3.1")          
-                            PoolStart = "192.168.3.40"          
+                            PoolStart = "192.168.3.41"          
                             PoolEnd = "192.168.3.79"            
                        }
                     )
@@ -456,7 +456,7 @@
             NodeName="MUX1"                                          
             Role="SLBMUX"
             MuxVirtualServerResourceId="MUX1"                        
-            MuxResourceId="MUX-01"                                     
+            MuxResourceId="MUX1"                                     
             HnvPaMac="00-1D-C8-00-00-02"
          }#,
          <#@{ 
