@@ -24,7 +24,7 @@
 
             #This is the FQDN that the Network Controller's REST IP is assigned to.
             #IMPORTANT: This name must be manually added to your DNS server and map to the NetworkControllerRestIP
-            NetworkControllerRestName = "nc-01.$env:USERDNSDOMAIN"    #Example (after evaluation of $env:USERDNSDOMAIN): myname.COMPANY.com
+            NetworkControllerRestName = "nc1.$env:USERDNSDOMAIN"    #Example (after evaluation of $env:USERDNSDOMAIN): myname.COMPANY.com
             NetworkControllerRestIP = "192.168.3.12"                         #Example: 10.20.30.40
             NetworkControllerRestIPMask = "24"                     #Example: 24
            
