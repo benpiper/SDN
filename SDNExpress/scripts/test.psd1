@@ -266,8 +266,8 @@
                     }
                 )
               }
-              <#@{ 
-                VMName="MTGW-01"                                        
+              @{ 
+                VMName="MTGW1"                                        
 				VMMemory=4GB                                            
                 VMRole = "Gateway"
 
@@ -291,7 +291,7 @@
 
                 #This must match the VLAN ID for the transit network as defined in the logical networks section
                 ExternalVlanId = "0"                         
-              }#>
+              }
             )
          },
          <#@{ 
@@ -466,8 +466,8 @@
             MuxResourceId="MUX-02"                                     
             HnvPaMac="00-1D-C8-00-00-04"            
          },   #>      
-         <#@{ 
-            NodeName="MTGW-01"                                         
+         @{ 
+            NodeName="MTGW1"                                         
             Role     = "Gateway"
             GatewayPoolResourceId = "default"
 
@@ -475,8 +475,8 @@
             ExternalNicPortProfileId = "00000000-3333-0000-1111-000000000001"
             InternalNicMac = "00-20-11-11-11-01"
             ExternalNicMac = "00-20-11-11-11-02"
-            ExternalIPAddress = "10.10.10.111"                            
-         }#>
+            ExternalIPAddress = "192.168.3.80"                            
+         }
        <#  @{ 
             NodeName="MTGW-02"                                            
             Role     = "Gateway"
