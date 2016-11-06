@@ -1552,10 +1552,8 @@ Configuration ConfigureNetworkControllerCluster
                     $slbmip = $candidateSlbmIp    
                 }
                 
-                #$lbconfig = set-ncloadbalancermanager -IPAddress $slbmip -VIPIPPools $vipippools -OutboundNatIPExemptions @("$slbmip/32")                
-                Testing hardcoded IP
-                $lbconfig = set-ncloadbalancermanager -IPAddress "192.168.3.160"  -OutboundNatIPExemptions @("192.168.3.160/32")                
-
+                $lbconfig = set-ncloadbalancermanager -IPAddress $slbmip -VIPIPPools $vipippools -OutboundNatIPExemptions @("$slbmip/32")                
+                
                 $pwd = ConvertTo-SecureString $using:node.NCClusterPassword -AsPlainText -Force
                 $cred = New-Object System.Management.Automation.PSCredential $using:node.NCClusterUsername, $pwd                
                 write-verbose "Finished configuring SLB Manager"
