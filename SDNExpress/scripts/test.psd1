@@ -475,7 +475,7 @@
             ExternalNicPortProfileId = "00000000-3333-0000-1111-000000000001"
             InternalNicMac = "00-20-11-11-11-01"
             ExternalNicMac = "00-20-11-11-11-02"
-            ExternalIPAddress = "192.168.3.80"                            
+            ExternalIPAddress = "192.168.3.41"                            
          }
        <#  @{ 
             NodeName="MTGW-02"                                            
