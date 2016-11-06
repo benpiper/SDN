@@ -1553,7 +1553,7 @@ Configuration ConfigureNetworkControllerCluster
                 }
                 
                 #$lbconfig = set-ncloadbalancermanager -IPAddress $slbmip -VIPIPPools $vipippools -OutboundNatIPExemptions @("$slbmip/32")                
-                Testing hardcoded IP
+                #Testing hardcoded IP
                 $lbconfig = set-ncloadbalancermanager -IPAddress "192.168.3.160"  -OutboundNatIPExemptions @("192.168.3.160/32")                
 
                 $pwd = ConvertTo-SecureString $using:node.NCClusterPassword -AsPlainText -Force
