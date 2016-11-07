@@ -15,7 +15,7 @@
             VMLocation="e:\sdnvm"                                          #Example: "C:\ClusterStorage\Volume1\VMs"
             
             # Network controller computer name with FQDN
-            NetworkControllerRestName = "nc-01.$env:USERDNSDOMAIN"        #Example (after evaluation of $env:USERDNSDOMAIN): myname.contoso.com
+            NetworkControllerRestName = "nc1.$env:USERDNSDOMAIN"        #Example (after evaluation of $env:USERDNSDOMAIN): myname.contoso.com
             
             #This is the name of the virtual switch that must exist on each host.  Note: if you have any 
             #Hyper-V hosts which virtual switches that are named differently, you can override this variable
@@ -40,15 +40,15 @@
                     Subnets = @(
                         @{
                            ID = "WebTier_Subnet"
-                           AddressSpace = "192.168.3.0"
-                           Gateway = "192.168.3.1"
+                           AddressSpace = "192.168.90.0"
+                           Gateway = "192.168.90.1"
                            Mask = "24"
                            ACLGuid = "d7ae4460-694d-0000-1111-4943211728a9"
                          },
                         @{
                            ID = "DBTier_Subnet"
-                           AddressSpace = "192.168.4.0"
-                           Gateway = "192.168.4.1"
+                           AddressSpace = "192.168.80.0"
+                           Gateway = "192.168.80.1"
                            Mask = "24"
                            AclGuid = "e32a6d3c-7082-0000-1111-9bd5fa05bbc9"
                          }
@@ -59,7 +59,7 @@
              VIPLN_GUID = "f8f67956-3906-4303-94c5-09cf91e7e311"
 
              #VIP for web tier.  Must come from VIP subnet passed into SDNExpress.
-             VIPIP = "10.0.50.5"                                            #Example: "10.127.134.133"
+             VIPIP = "192.168.3.158"                                            #Example: "10.127.134.133"
 
              NetworkInterfaces = @{
                 WebTier = @("6daca142-7d94-0000-1111-c38c0141be06", "e8425781-5f40-0000-1111-88b7bc7620ca")
@@ -93,7 +93,7 @@
                     VMMemory=2GB
                     ResourceId="6daca142-7d94-0000-1111-c38c0141be06"
                     Subnet=0
-                    IPAddress="192.168.3.10"
+                    IPAddress="192.168.90.10"
                     MacAddress="001DC8B70100"
                     PageColor="green"
                     Role="WebTier"
@@ -103,7 +103,7 @@
                     VMMemory=2GB
                     ResourceId="e8425781-5f40-0000-1111-88b7bc7620ca" 
                     Subnet=0
-                    IPAddress="192.168.3.11"
+                    IPAddress="192.168.90.11"
                     MacAddress="001DC8B70101"
                     PageColor="blue"
                     Role="WebTier"
@@ -113,7 +113,7 @@
                     VMMemory=2GB
                     ResourceId="334b8585-e6c7-0000-1111-ccb84a842922" 
                     Subnet=1
-                    IPAddress="192.168.4.10"
+                    IPAddress="192.168.80.10"
                     MacAddress="001DC8B70102"
                     PageColor="white"
                     Role="DBTier"
@@ -176,7 +176,7 @@
                     PeerIPAddresses = @()
 
                     # Tunnel Destination (Enterprise Gateway) IP Address
-                    DestinationIPAddress = "192.168.88.1"                                      #Example: "10.127.134.121"
+                    DestinationIPAddress = "192.168.3.1"                                      #Example: "10.127.134.121"
                     # Pre Shared Key (Only PSK is enabled via this script for IPSec VPN)
                     SharedSecret = "111_aaa"                      
                 },
@@ -192,7 +192,7 @@
                     # You can also add multiple subnets here
                     Routes = @(
                         @{
-                            Prefix = "192.168.88.1/32"
+                            Prefix = "192.168.3.1/32"
                             Metric = 10
                         }
                     )
@@ -200,7 +200,7 @@
                     PeerIPAddresses = @()
                     
                     # Tunnel Destination (Enterprise Gateway) IP Address
-                    DestinationIPAddress = "192.168.88.1"                                      #Example: "10.127.134.122"
+                    DestinationIPAddress = "192.168.3.1"                                      #Example: "10.127.134.122"
                     # GRE Key for Tunnel Isolation 
                     GreKey = "1234"                      
                 },
@@ -217,9 +217,9 @@
                         Subnets = @(
                             @{
                                 Guid = "L3_Subnet1"
-                                AddressSpace = "192.168.88.0"                                  #Example: "10.127.134.0"
+                                AddressSpace = "192.168.3.0"                                  #Example: "10.127.134.0"
                                 Mask = "24"                                          #Example: 25
-                                DefaultGateway = "192.168.88.1"                                #Example: "10.127.134.1"
+                                DefaultGateway = "192.168.3.1"                                #Example: "10.127.134.1"
                                 VlanId = "0"                                        #Example: 1001
                             }
                         )
@@ -229,19 +229,19 @@
                     # You can also add multiple subnets here
                     Routes = @(
                         @{
-                            Prefix = "192.168.88.1/32"
+                            Prefix = "192.168.3.1/32"
                             Metric = 10
                         }
                     )
                     # Local HNV Gateway's L3 Forwarding IP Address
                     IPAddresses = @(
                         @{
-                            IPAddress = "192.168.88.1"                                        #Example: "10.127.134.55"
+                            IPAddress = "192.168.3.1"                                        #Example: "10.127.134.55"
                             Mask = "24"                                             #Example: 25
                         }
                     )
                     # Remote Gateway's L3 Forwarding IP Address
-                    PeerIPAddresses = @("192.168.88.1")                                       #Example: @("10.127.134.65")
+                    PeerIPAddresses = @("192.168.3.1")                                       #Example: @("10.127.134.65")
                 }
             )
 
@@ -252,24 +252,24 @@
             BgpRouter = @{
                 RouterId = "Vnet_Router1"
                 LocalASN = 64510
-                RouterIP = "192.168.88.9"
+                RouterIP = "192.168.3.9"
             }
 
             BgpPeers = 
             @(
                 @{
                     PeerName = "SiteA_IPSec"
-                    PeerIP   = "192.168.88.1"
+                    PeerIP   = "192.168.3.1"
                     PeerASN  = 64521
                 },
                 @{
                     PeerName = "SiteB_Gre"
-                    PeerIP   = "192.168.88.1"
+                    PeerIP   = "192.168.3.1"
                     PeerASN  = 64522
                 },
                 @{
                     PeerName = "SiteC_L3"
-                    PeerIP   = "192.168.88.1"
+                    PeerIP   = "192.168.3.1"
                     PeerASN  = 64523
                 }
             )
