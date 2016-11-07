@@ -1505,7 +1505,9 @@ Configuration ConfigureNetworkControllerCluster
                         }
                     }
                 }
-                
+                # Eliminate duplicate subnets
+                $vipSubnets = $vipSubnets | Get-Unique
+
                 if ($vipSubnets.Count -eq 0) {
                     throw "No VIP Pool is defined in the configuration. At least one VIP pool should be defined."
                 }                                
