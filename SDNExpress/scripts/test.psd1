@@ -194,7 +194,7 @@
             
             #This is the public IP address that is assigned to the Site-to-site gateway pool.  It must come from the public VIP logical
             #network pool defined above.
-            GatewayPublicIPAddress = "192.168.3.120"              
+            GatewayPublicIPAddress = "192.168.3.159"              
 
             #You generally don't need to change the rest of the values in this section
 
