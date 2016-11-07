@@ -1490,6 +1490,7 @@ Configuration ConfigureNetworkControllerCluster
                 
                 $LogicalNetworks = Get-NCLogicalNetwork
                 $vipippools = @()
+                $logicalNetsWithVips = @()
                 $slbmip = ""
 
                 Write-Verbose "Getting the subnets that have VIP pools from config data."
@@ -1500,21 +1501,23 @@ Configuration ConfigureNetworkControllerCluster
                         if ($sn.IsVipPool -eq $true) {
                             Write-Verbose "Found VIP subnet in logical network $($logicalNet.Name)."
                             $vipSubnets += $sn
+                            $logicalNetsWithVips += $logicalNet
                         }
                     }
                 }
                 
                 if ($vipSubnets.Count -eq 0) {
                     throw "No VIP Pool is defined in the configuration. At least one VIP pool should be defined."
-                }
-                
+                }                                
+
                 write-verbose "Finding VIP subnets information from NC."
                 foreach ($vipSn in $vipSubnets) {
                     $matchFound = $false
                     Write-Verbose "Searching subnets from NC to find the matching subnet ($($vipSn.AddressPrefix))."
-                    foreach ($ln in $logicalNetworks) {
+                    foreach ($ln in $logicalNetsWithVips) {
                         write-verbose "Checking logical network $($ln.resourceid)."
-                        foreach ($subnet in $ln.properties.subnets) {
+                        $theln = Get-NCLogicalNetwork -ResourceID $ln.resourceid
+                        foreach ($subnet in $theln.properties.subnets) {
                             write-verbose "checking subnet $($subnet.properties.addressprefix)."
                             if($vipsn.AddressPrefix -eq $subnet.properties.addressprefix) {
                                 $matchFound = $true
