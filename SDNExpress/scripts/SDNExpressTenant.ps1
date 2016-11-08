@@ -845,14 +845,18 @@ if ($psCmdlet.ParameterSetName -ne "NoParameters")
         $no = New-Object System.Management.Automation.Host.ChoiceDescription "&No", "Skip"
         $options = [System.Management.Automation.Host.ChoiceDescription[]]($yes, $no)
         
-        $vip_result = $host.ui.PromptForChoice($vip_title, $vip_message, $options, 0)
+        # Bypass prompts for public VIP and S2S gateway
+        $vip_result = 0
+        $vgw_result = 0
+
+        #$vip_result = $host.ui.PromptForChoice($vip_title, $vip_message, $options, 0)
         if ($vip_result -eq 0)
         {
             CreateVIP -ConfigurationData $ConfigData -verbose
             Start-DscConfiguration -Path .\CreateVIP -Wait -Force -Verbose
         }    
 
-        $vgw_result = $host.ui.PromptForChoice($vgw_title, $vgw_message, $options, 0)
+        #$vgw_result = $host.ui.PromptForChoice($vgw_title, $vgw_message, $options, 0)
         if ($vgw_result -eq 0)
         {
             ConfigureVirtualGateway -ConfigurationData $ConfigData -verbose
