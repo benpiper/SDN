@@ -37,7 +37,7 @@
             Network = @{
                     ID  = "VNet1"
                     DNSServers = @("192.168.1.1")                             #Example: @("10.60.34.9")
-                    <#Subnets = @(
+                    Subnets = @(
                         @{
                            ID = "WebTier_Subnet"
                            AddressSpace = "192.168.90.0"
@@ -52,7 +52,7 @@
                            Mask = "24"
                            AclGuid = "e32a6d3c-7082-0000-1111-9bd5fa05bbc9"
                          }
-                    )#>
+                    )
                     HNVLN_GUID = "bb6c6f28-bad9-441b-8e62-57d2be255904"                  
              }
 
@@ -92,7 +92,7 @@
                     VMName="T1WebTier-VM1"
                     VMMemory=2GB
                     ResourceId="6daca142-7d94-0000-1111-c38c0141be06"
-                    #Subnet=0
+                    Subnet=0
                     IPAddress="192.168.90.10"
                     MacAddress="001DC8B70100"
                     PageColor="green"
@@ -102,7 +102,7 @@
                     VMName="T1WebTier-VM2"
                     VMMemory=2GB
                     ResourceId="e8425781-5f40-0000-1111-88b7bc7620ca" 
-                    #Subnet=0
+                    Subnet=0
                     IPAddress="192.168.90.11"
                     MacAddress="001DC8B70101"
                     PageColor="blue"
@@ -112,7 +112,7 @@
                     VMName="T1DBTier-VM1"
                     VMMemory=2GB
                     ResourceId="334b8585-e6c7-0000-1111-ccb84a842922" 
-                    #Subnet=1
+                    Subnet=1
                     IPAddress="192.168.80.10"
                     MacAddress="001DC8B70102"
                     PageColor="white"
@@ -168,7 +168,7 @@
                     # You can also add multiple subnets here
                     Routes = @(
                         @{
-                            Prefix = "192.168.3.1/32"
+                            Prefix = "192.168.88.1/32"
                             Metric = 10
                         }
                     )
