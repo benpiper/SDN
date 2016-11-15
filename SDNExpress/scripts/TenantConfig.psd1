@@ -51,21 +51,7 @@
                            Gateway = "192.168.80.1"
                            Mask = "24"
                            AclGuid = "e32a6d3c-7082-0000-1111-9bd5fa05bbc9"
-                         },
-                        @{
-                           ID = "WebTier_v6_Subnet"
-                           AddressSpace = "2001:90::"
-                           Gateway = "2001:90::1"
-                           Mask = "64"
-                           ACLGuid = "d7ae4460-694d-0000-1111-4943211728a9"
-                         },
-                        @{
-                            ID = "DBTier_v6_Subnet"
-                            AddressSpace = "2001:80::"
-                            Gateway = "2001:80::1"
-                            Mask = "64"
-                            AclGuid = "e32a6d3c-7082-0000-1111-9bd5fa05bbc9"
-                        }
+                         }
                     )
                     HNVLN_GUID = "bb6c6f28-bad9-441b-8e62-57d2be255904"                  
              }
