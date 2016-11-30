@@ -10,7 +10,7 @@
 
             #VM Creation variables
                         
-            VHDName="2016_x64_Datacenter_EN_Eval.vhdx"
+            VHDName="2016_x64_Datacenter_Core_EN_Eval.vhdx"
             #VHDName="2016TP5_x64_Datacenter_EN.vhdx"
             ProductKey=""                                                                               
 

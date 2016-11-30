@@ -8,7 +8,7 @@
 
             #VM Creation variables
                         
-            VHDName="2016_x64_Datacenter_EN_Eval.vhdx"    # Name of the VHDX to use for VM creation. must exist in the images path under InstallSrcDir
+            VHDName="2016_x64_Datacenter_Core_EN_Eval.vhdx"    # Name of the VHDX to use for VM creation. must exist in the images path under InstallSrcDir
             ProductKey=""                                                                               # Can be blank if using a volume license, or you are deploying in eval mode.  (Don't forget to press "skip").
 
             #Update to a local path on the hyper-v hosts if local storage, or a UNC path for shared storage  
