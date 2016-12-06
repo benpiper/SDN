@@ -1,19 +1,32 @@
-﻿### Attach VM to dbtier vnet
+﻿### Attach VM to infratier vnet
 
 #Prerequisites: VM already built using lability
 
 #Shut down VM and move to sdnswitch
-$na = Get-VMNetworkAdapter -VMName DC1
+Stop-VM -VMName DC-SDN
+$na = Get-VMNetworkAdapter -VMName DC-SDN
 Connect-VMNetworkAdapter -SwitchName "sdnSwitch" -VMNetworkAdapter $na
 
 #Grab NC functions
 . .\NetworkControllerRESTWrappers.ps1 -ComputerName nc1.company.pri -UserName "company\administrator" -Password "Tr@ining123"
 
-$vnet = Get-NCVirtualNetwork -ResourceId "company_vnet1" #"$($node.TenantName)_$($network.ID)" #probably company_vnet1
-$vsubnet = Get-NCVirtualSubnet -VirtualNetwork $vnet -ResourceId "dbtier_subnet" #$Network.Subnets[$using:VMInfo.subnet].ID #dbtier_subnet
-#can resourceid (guid?) below be randomly generated on the fly and used?
+$vnet = Get-NCVirtualNetwork -ResourceId "company_vnet1"
+$vnet
+$vnet.properties.addressSpace
+$vsubnet = Get-NCVirtualSubnet -VirtualNetwork $vnet -ResourceId "infratier_subnet"
+$vsubnet
+$vsubnet.properties
+
+#Create virtual network interface on DC-SDN
 #MAC address must be static and match the VMs actual MAC
 $newguid = [System.Guid]::NewGuid().toString()
-$vnic = New-NCNetworkInterface -resourceId "$newguid" -Subnet $vsubnet -IPAddress "192.168.80.9" -MACAddress "001DC8B70110" #-DNSServers $network.DNSServers
+$mac = "001DC8B70110"
+$vnic = New-NCNetworkInterface -resourceId "$newguid" -Subnet $vsubnet -IPAddress "192.168.80.10" -MACAddress $mac
+$vnic.properties.ipConfigurations.properties
+
+#Attach DC-SDN to the InfraTier_subnet
 $vnicInstanceId = Get-NCNetworkInterfaceInstanceId -ResourceId $newguid
-Set-PortProfileId -resourceID ($vnicInstanceId) -VMName "DC1" #-ComputerName $using:hostNode.NodeName
+Set-PortProfileId -resourceID ($vnicInstanceId) -VMName "DC-SDN"
+
+#Boot DC-SDN
+Start-VM -VMName DC-SDN

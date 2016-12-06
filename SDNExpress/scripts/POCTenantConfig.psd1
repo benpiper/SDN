@@ -36,17 +36,17 @@
             #Virtual network information.  You don't need to change this, unless you want to.
             Network = @{
                     ID  = "VNet1"
-                    DNSServers = @("192.168.1.1")                             #Example: @("10.60.34.9")
+                    DNSServers = @("192.168.80.10")                             #Example: @("10.60.34.9")
                     Subnets = @(
                         @{
-                           ID = "WebTier_Subnet"
+                           ID = "AppTier_Subnet"
                            AddressSpace = "192.168.90.0"
                            Gateway = "192.168.90.1"
                            Mask = "24"
                            ACLGuid = "d7ae4460-694d-0000-1111-4943211728a9"
                          },
                         @{
-                           ID = "DBTier_Subnet"
+                           ID = "InfraTier_Subnet"
                            AddressSpace = "192.168.80.0"
                            Gateway = "192.168.80.1"
                            Mask = "24"
@@ -62,8 +62,8 @@
              VIPIP = "192.168.3.158"                                            #Example: "10.127.134.133"
 
              NetworkInterfaces = @{
-                WebTier = @("6daca142-7d94-0000-1111-c38c0141be06", "e8425781-5f40-0000-1111-88b7bc7620ca")
-                DbTier = @("334b8585-e6c7-0000-1111-ccb84a842922")
+                AppTier = @("6daca142-7d94-0000-1111-c38c0141be06", "e8425781-5f40-0000-1111-88b7bc7620ca")
+                InfraTier = @("334b8585-e6c7-0000-1111-ccb84a842922")
              }
 
              TenantName = "company"                                       #Example: "Contoso"
@@ -89,25 +89,25 @@
             VMs=@(
                 # Customization information for WebTier VM.  You don't need to change this  unless you changed the virtual network information above.
                 @{  
-                    VMName="T1WebTier-VM1"
+                    VMName="FILE3"
                     VMMemory=2GB
                     ResourceId="6daca142-7d94-0000-1111-c38c0141be06"
                     Subnet=0
-                    IPAddress="192.168.90.10"
+                    IPAddress="192.168.90.3"
                     MacAddress="001DC8B70100"
                     PageColor="green"
                     Role="WebTier"
                 },
                 @{ 
-                    VMName="T1WebTier-VM2"
+                    VMName="FILE4"
                     VMMemory=2GB
                     ResourceId="e8425781-5f40-0000-1111-88b7bc7620ca" 
                     Subnet=0
-                    IPAddress="192.168.90.11"
+                    IPAddress="192.168.90.4"
                     MacAddress="001DC8B70101"
                     PageColor="blue"
                     Role="WebTier"
-                },
+                }<#,
                 @{ 
                     VMName="T1DBTier-VM1"
                     VMMemory=2GB
@@ -117,7 +117,7 @@
                     MacAddress="001DC8B70102"
                     PageColor="white"
                     Role="DBTier"
-                }
+                }#>
             )
          }
         <#@{ 
