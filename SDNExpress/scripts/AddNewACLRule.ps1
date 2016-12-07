@@ -25,9 +25,17 @@ $acl.properties.aclRules.properties | Select * -ExcludeProperty provisioningstat
 #Create a new rule to deny PowerShell into infratier subnet
 $acl.properties.aclRules += New-NCAccessControlListRule -Protocol "tcp" -SourcePortRange "0-65535" -DestinationPortRange "5985" -SourceAddressPrefix "*" -DestinationAddressPrefix "*" -Action "Deny" -Logging $true -ACLType "inbound" -Priority 100
 
-#Add the rule to the ACL
+#Update the ACL with the new rule
 New-NCAccessControlList -ResourceID $acl.resourceId -AccessControlListRules $acl.properties.aclRules -Verbose
 
 #Verify the ACL has the new rule
+$acl = Get-NCAccessControlList | where {$_.resourceRef -eq $aclref}
+$acl.properties.aclRules.properties | Select * -ExcludeProperty provisioningstate | ft
+
+#Remove all deny rules
+$acl.properties.aclRules = $acl.properties.aclRules | Where-Object {$_.properties.action -ne "Deny"}
+New-NCAccessControlList -ResourceID $acl.resourceId -AccessControlListRules $acl.properties.aclRules -Verbose
+
+#Verify the deny rules have been removed
 $acl = Get-NCAccessControlList | where {$_.resourceRef -eq $aclref}
 $acl.properties.aclRules.properties | Select * -ExcludeProperty provisioningstate | ft
