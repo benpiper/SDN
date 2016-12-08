@@ -12,16 +12,19 @@ Connect-VMNetworkAdapter -SwitchName "sdnSwitch" -VMNetworkAdapter $na
 
 $vnet = Get-NCVirtualNetwork -ResourceId "company_vnet1"
 $vnet
+$vnet.properties
 $vnet.properties.addressSpace
-$vsubnet = Get-NCVirtualSubnet -VirtualNetwork $vnet -ResourceId "infratier_subnet"
+
+$vsubnet = Get-NCVirtualSubnet -VirtualNetwork $vnet -ResourceId "InfraTier_Subnet"
 $vsubnet
 $vsubnet.properties
 
 #Create virtual network interface on DC-SDN
 #MAC address must be static and match the VMs actual MAC
 $newguid = [System.Guid]::NewGuid().toString()
-$mac = "001DC8B70110"
-$vnic = New-NCNetworkInterface -resourceId "$newguid" -Subnet $vsubnet -IPAddress "192.168.80.10" -MACAddress $mac
+$mac = (Get-VMNetworkAdapter -VMName DC-SDN).MacAddress
+$vnic = New-NCNetworkInterface -resourceId "$newguid" -Subnet $vsubnet -IPAddress "192.168.90.10" -MACAddress $mac
+$vnic
 $vnic.properties.ipConfigurations.properties
 
 #Attach DC-SDN to the InfraTier_subnet
