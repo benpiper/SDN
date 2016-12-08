@@ -66,7 +66,7 @@
                 InfraTier = @("334b8585-e6c7-0000-1111-ccb84a842922")
              }
 
-             TenantName = "company"                                       #Example: "Contoso"
+             TenantName = "PS"                                       #Example: "Contoso"
 
              #
              #You generally don't need to change the rest of the values in this section
@@ -125,7 +125,7 @@
             NodeName="HYPERV1"                                            #Example: "Host-03"
             Role="HyperVHost"
             VMs=@(
-                # Customization information for WebTier and DB Tier VMs.  You don't need to change this  unless you changed the virtual network information above.
+                # Customization information.  You don't need to change this  unless you changed the virtual network information above.
                 @{ 
                     VMName="T1WebTier-VM2"
                     VMMemory=2GB

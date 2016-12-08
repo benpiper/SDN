@@ -1,7 +1,5 @@
 ﻿### Attach VM to infratier vnet
 
-#Prerequisites: VM already built using lability
-
 #Shut down VM and move to sdnswitch
 Stop-VM -VMName DC-SDN
 $na = Get-VMNetworkAdapter -VMName DC-SDN
@@ -10,7 +8,7 @@ Connect-VMNetworkAdapter -SwitchName "sdnSwitch" -VMNetworkAdapter $na
 #Grab NC functions
 . .\NetworkControllerRESTWrappers.ps1 -ComputerName nc1.company.pri -UserName "company\administrator" -Password "Tr@ining123"
 
-$vnet = Get-NCVirtualNetwork -ResourceId "company_vnet1"
+$vnet = Get-NCVirtualNetwork -ResourceId "ps_vnet"
 $vnet
 $vnet.properties
 $vnet.properties.addressSpace
@@ -23,7 +21,7 @@ $vsubnet.properties
 #MAC address must be static and match the VMs actual MAC
 $newguid = [System.Guid]::NewGuid().toString()
 $mac = (Get-VMNetworkAdapter -VMName DC-SDN).MacAddress
-$vnic = New-NCNetworkInterface -resourceId "$newguid" -Subnet $vsubnet -IPAddress "192.168.90.10" -MACAddress $mac
+$vnic = New-NCNetworkInterface -resourceId "$newguid" -Subnet $vsubnet -IPAddress "192.168.80.10" -MACAddress $mac
 $vnic
 $vnic.properties.ipConfigurations.properties
 
