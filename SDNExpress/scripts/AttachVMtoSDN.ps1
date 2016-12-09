@@ -8,7 +8,7 @@ Connect-VMNetworkAdapter -SwitchName "sdnSwitch" -VMNetworkAdapter $na
 #Grab NC functions
 . .\NetworkControllerRESTWrappers.ps1 -ComputerName nc1.company.pri -UserName "company\administrator" -Password "Tr@ining123"
 
-$vnet = Get-NCVirtualNetwork -ResourceId "ps_vnet"
+$vnet = Get-NCVirtualNetwork -ResourceId "ps_vnet1"
 $vnet
 $vnet.properties
 $vnet.properties.addressSpace
